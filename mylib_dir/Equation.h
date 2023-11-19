@@ -70,14 +70,10 @@ class Variable{
     
     IMesh* var_ptr_imesh = nullptr;
     std::vector<float> vect;
-    float u_n = 0;
-    float u_np1 = 0;
-    
-    int n = (*var_ptr_imesh).x_size();
     
     public :
-    Variable(IMesh& imesh){
-        
+    Variable(IMesh* imesh){
+        int n = (*imesh).x_size();
         vect.reserve(n);
         fill(vect.begin(), vect.end(), 0);
     };
@@ -85,5 +81,8 @@ class Variable{
     float& operator[](int i){
         return vect[i];
     }
+    
+    float u_n = -1;
+    float u_np1 = -1;
 };
 

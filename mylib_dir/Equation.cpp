@@ -5,7 +5,7 @@ void Equation::compute(IMesh* imesh)const{
     for (int x = 0; x<=h; ++x){
         std::cout << "-- at x_i = " << (*imesh).get_pos_init()+x*(*imesh).get_dx() <<std::endl;
     }
-};
+}
 
 float UniformMesh::get_tmp_init  ()const{
     return t_ini;
