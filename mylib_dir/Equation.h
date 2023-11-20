@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
+#include <algorithm>
 
 class IMesh{
     public:
@@ -9,8 +11,8 @@ class IMesh{
     virtual float get_pos_init()const {return -1;};
     virtual float get_pos_fin()const {return -1;};
     virtual float get_dx() const{return -1;};
-    int x_size()const{return (get_pos_init()-get_pos_fin())/get_dx();}
-    
+    int x_size()const{return (get_pos_fin()-get_pos_init())/get_dx();}
+    int x_i(int i)const{return get_pos_init()+ get_dx()*i;}
     virtual ~IMesh() = default;
 };
 
@@ -59,30 +61,32 @@ class NonUniformMesh : public IMesh{
 };
 
 
-class Equation{
-    public :
-    void compute(IMesh* imesh)const;
-};
-
-
 
 class Variable{
-    
     IMesh* var_ptr_imesh = nullptr;
-    std::vector<float> vect;
+    std::vector<float> vect; //donne les solutions avec x fixe et t varie
     
     public :
     Variable(IMesh* imesh){
         int n = (*imesh).x_size();
+        var_ptr_imesh = imesh;
         vect.reserve(n);
-        fill(vect.begin(), vect.end(), 0);
+        fill(vect.begin(), vect.end(), -1);
+        
     };
     
     float& operator[](int i){
         return vect[i];
     }
     
-    float u_n = -1;
-    float u_np1 = -1;
+    std::vector<float> u_n ; //donne les solutions avec t fixe et x varie
+    std::vector<float> u_np1 ; //
+
 };
 
+class Equation{
+    float a = 0;
+    public :
+    void compute(IMesh* imesh, std::vector<float> & u_n, std::vector<float> & u_np1);//
+    void compute_initial_condition(IMesh* imesh,Variable & v); //donne U_0 = U(X_0,t_n)
+};

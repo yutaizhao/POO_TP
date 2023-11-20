@@ -16,7 +16,8 @@ class Problem{
     }
     
     
-    void solve()const;
+    void solve();//donnee t_i
+    
 };
 
 

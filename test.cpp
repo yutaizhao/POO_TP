@@ -16,6 +16,12 @@ TEST(UnitaryTest,ProblemTest){
     
 }
 
+TEST(UnitaryTest,VariableTest){
+    UniformMesh unimesh{1,5,0.5,1,10,1};
+    Problem p_uni{unimesh};
+    Variable var{&unimesh};
+}
+
 TEST(MainFunctionTest,EquationTest){
 }
 
