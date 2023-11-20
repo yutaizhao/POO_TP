@@ -84,9 +84,23 @@ class Variable{
 
 };
 
+
 class Equation{
     float a = 0;
     public :
     void compute(IMesh* imesh, std::vector<float> & u_n, std::vector<float> & u_np1);//
-    void compute_initial_condition(IMesh* imesh,Variable & v); //donne U_0 = U(X_0,t_n)
+    template<typename T>
+    void compute_initial_condition(IMesh* imesh,Variable & v,T f); //donne U_0 = U(X_0,t_n)
 };
+
+template<typename T>
+void Equation::compute_initial_condition(IMesh* imesh,Variable & v,T f){
+    for(int i =0; i<= (*imesh).x_size();++i){
+        float mu = ((*imesh).get_pos_fin() - (*imesh).get_pos_init())/2;
+        float lam = 10*(*imesh).get_dx();
+        float xi = (*imesh).x_i(i);
+        float pi = 4*atan(1);
+        v[i] = f(lam,mu,pi,xi);
+    }
+}
+

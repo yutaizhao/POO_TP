@@ -13,16 +13,6 @@ void Equation::compute(IMesh* imesh, std::vector<float> & u_n, std::vector<float
     u_n = std::move(u_np1);
 }
 
-void Equation::compute_initial_condition(IMesh* imesh,Variable & v){
-    for(int i =0; i<= (*imesh).x_size();++i){
-        float mu = ((*imesh).get_pos_fin() - (*imesh).get_pos_init())/2;
-        float lam = 10*(*imesh).get_dx();
-        float xi = (*imesh).x_i(i);
-        float pi = 4*atan(1);
-        v[i] = (1/(lam*sqrt(2*pi)))*exp(-pow((xi - mu),2)/(2*pow(lam,2)));
-    }
-}
-
 float UniformMesh::get_tmp_init  ()const{
     return t_ini;
 }

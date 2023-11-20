@@ -7,9 +7,11 @@ void Problem::solve(){
     Variable var {ptr_imesh};
     var.u_n.reserve(n);
     var.u_np1.reserve(n);
+    
+    auto f = [](float lam, float mu, float pi, float xi){return (1/(lam*sqrt(2*pi)))*exp(-pow((xi - mu),2)/(2*pow(lam,2)));};
 
     fill(var.u_np1.begin(), var.u_np1.end(), -1);
-    eq.compute_initial_condition(ptr_imesh,var);
+    eq.compute_initial_condition(ptr_imesh,var,f);
     
     for(int i =0; i<= n;++i){
         var.u_n[i] = var[i];
