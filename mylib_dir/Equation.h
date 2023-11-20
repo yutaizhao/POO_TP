@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
+static const float CFL = 0.5;
 
 class IMesh{
     public:
@@ -70,7 +71,7 @@ class Variable{
     Variable(IMesh* imesh){
         int n = (*imesh).x_size();
         var_ptr_imesh = imesh;
-        vect.reserve(n);
+        vect.reserve(n+1);
         fill(vect.begin(), vect.end(), -1);
         
     };
@@ -86,15 +87,19 @@ class Variable{
 
 
 class Equation{
-    float a = 0;
     public :
-    void compute(IMesh* imesh, std::vector<float> & u_n, std::vector<float> & u_np1);//
+    float a = -1 ; //= CFL*(*imesh).get_dx()/(*imesh).get_dt();
+    void compute(IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1);//
     template<typename T>
     void compute_initial_condition(IMesh* imesh,Variable & v,T f); //donne U_0 = U(X_0,t_n)
+    template<class C>
+    void compute_for_scheme(float a, IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1){
+        C::update( a, imesh, u_n, u_np1);
+    }
 };
 
 template<typename T>
-void Equation::compute_initial_condition(IMesh* imesh,Variable & v,T f){
+void Equation::compute_initial_condition(IMesh* imesh,Variable& v,T f){
     for(int i =0; i<= (*imesh).x_size();++i){
         float mu = ((*imesh).get_pos_fin() - (*imesh).get_pos_init())/2;
         float lam = 10*(*imesh).get_dx();
@@ -104,3 +109,20 @@ void Equation::compute_initial_condition(IMesh* imesh,Variable & v,T f){
     }
 }
 
+class Upwind{
+    public :
+    static void update(float a, IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1 ){
+        for(int i =1; i<= (*imesh).x_size();++i){
+            u_np1[i] =u_n[i] - CFL*(u_n[i] - u_n[i-1]); //CFL = a*dt/dx = 0.5
+        }
+        u_np1[0] =u_n[0] - CFL* (u_n[1]-0) ;
+        for(int i =0; i<= (*imesh).x_size();++i){
+            u_n[i] = u_np1[i];
+        }
+    }
+};
+
+class LaxWendroff{
+    public :
+    static void update(float a, IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1 ){}
+};
