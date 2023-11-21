@@ -65,14 +65,14 @@ class NonUniformMesh : public IMesh{
 
 class Variable{
     IMesh* var_ptr_imesh = nullptr;
-    std::vector<float> vect; //donne les solutions avec x fixe et t varie
+    
     
     public :
+    std::vector<float> vect; //donne les solutions avec x fixe et t varie
     Variable(IMesh* imesh){
         int n = (*imesh).x_size();
         var_ptr_imesh = imesh;
-        vect.reserve(n+1);
-        fill(vect.begin(), vect.end(), -1);
+        vect.resize(n+1,-1);
         
     };
     
@@ -116,9 +116,7 @@ class Upwind{
             u_np1[i] =u_n[i] - CFL*(u_n[i] - u_n[i-1]); //CFL = a*dt/dx = 0.5
         }
         u_np1[0] =u_n[0] - CFL* (u_n[1]-0) ;
-        for(int i =0; i<= (*imesh).x_size();++i){
-            u_n[i] = u_np1[i];
-        }
+        u_n = u_np1;
     }
 };
 
