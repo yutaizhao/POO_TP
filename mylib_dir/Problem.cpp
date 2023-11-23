@@ -11,9 +11,11 @@ void Problem::solve(){
 
     eq.compute_initial_condition(ptr_imesh,var,f);
     
+
     for(int i =0; i<= n;++i){
         var.u_n.push_back(var[i]);
     }
+    
     
     
     std::cout << "--- Solve problem ---" <<std::endl;
@@ -21,9 +23,12 @@ void Problem::solve(){
         std::cout << "--- compute equation at time : " << t << " ---"<<std::endl;
         eq.compute_exact_solution (ptr_imesh, var, t);
         eq.compute(ptr_imesh, var.u_n, var.u_np1);
-        std::cout << "U_ref" << std::endl;
-        var.print(var.u_ref);
-        std::cout << "U_np1" << std::endl;
-        var.print(var.u_np1);
+        var.print(t/(*ptr_imesh).get_dt());
     }
+    
+    std::ofstream graphe("../data/graphe.data");
+    for(int i =0; i<= n;++i){
+        graphe << (*ptr_imesh).x_i(i) << " " << var[i] << " " << var.u_n[i] <<" " <<var.u_ref[i] <<  std::endl;
+    }
+    graphe.close();
 }

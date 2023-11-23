@@ -5,6 +5,8 @@
 #include <concepts>
 #include <type_traits>
 #include <string>
+#include <map>
+#include <fstream>
 
 static const float CFL = 0.5;
 
@@ -88,9 +90,19 @@ class Variable{
     std::vector<float> u_np1 ; //
     std::vector<float> u_ref ;
     
-    std::string m_name;
-    void print(std::vector<float> const & vec){
-        for (float val : vec) std::cout << val << std::endl;
+    std::vector<std::string> m_name = {"Upwind","sol exacte"};
+    
+    void print(int t){
+        //data load
+        std::ofstream data("../data/Variable_u_np1_"+std::to_string(t)+".data");
+        
+        std::cout << m_name[0] <<";"<< m_name[1] << std::endl;
+        data << m_name[0] <<";"<< m_name[1] << std::endl;
+        for (int i= 0;  i<= (*var_ptr_imesh).x_size();++i) {
+            std::cout << u_np1[i] << ";" << u_ref[i] << std::endl;
+            data << u_np1[i] << ";" << u_ref[i] <<  std::endl;
+        }
+        data.close();
     }
 };
 
