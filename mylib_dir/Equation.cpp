@@ -7,7 +7,6 @@ void Equation::compute(IMesh* imesh, std::vector<float>& u_n, std::vector<float>
         cnt = cnt +1;
     }
     compute_for_scheme<Upwind>(a,imesh,u_n,u_np1);
-
 }
 
 float UniformMesh::get_tmp_init  ()const{

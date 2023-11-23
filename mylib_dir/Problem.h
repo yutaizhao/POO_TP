@@ -8,12 +8,12 @@ class Problem{
     Equation eq;
     
     public :
-    Problem(UniformMesh & um_ptr){
-        ptr_imesh = &um_ptr;
+    Problem(UniformMesh * um_ptr){
+        ptr_imesh = um_ptr;
         eq.a = CFL*(*ptr_imesh).get_dx()/(*ptr_imesh).get_dt();
     }
-    Problem(NonUniformMesh & num_ptr){
-        ptr_imesh = &num_ptr;
+    Problem(NonUniformMesh * num_ptr){
+        ptr_imesh = num_ptr;
     }
     
     

@@ -1,10 +1,10 @@
-Start testing: Nov 16 10:30 CET
+Start testing: Nov 23 03:13 CET
 ----------------------------------------------------------
-1/3 Testing: UnitaryTest.MeshTest
-1/3 Test: UnitaryTest.MeshTest
+1/4 Testing: UnitaryTest.MeshTest
+1/4 Test: UnitaryTest.MeshTest
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.MeshTest" "--gtest_also_run_disabled_tests"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"UnitaryTest.MeshTest" start time: Nov 16 10:30 CET
+"UnitaryTest.MeshTest" start time: Nov 23 03:13 CET
 Output:
 ----------------------------------------------------------
 Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
@@ -23,15 +23,15 @@ Note: Google Test filter = UnitaryTest.MeshTest
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.MeshTest" end time: Nov 16 10:30 CET
+"UnitaryTest.MeshTest" end time: Nov 23 03:13 CET
 "UnitaryTest.MeshTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-2/3 Testing: UnitaryTest.ProblemTest
-2/3 Test: UnitaryTest.ProblemTest
+2/4 Testing: UnitaryTest.ProblemTest
+2/4 Test: UnitaryTest.ProblemTest
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.ProblemTest" "--gtest_also_run_disabled_tests"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"UnitaryTest.ProblemTest" start time: Nov 16 10:30 CET
+"UnitaryTest.ProblemTest" start time: Nov 23 03:13 CET
 Output:
 ----------------------------------------------------------
 Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
@@ -42,102 +42,125 @@ Note: Google Test filter = UnitaryTest.ProblemTest
 [ RUN      ] UnitaryTest.ProblemTest
 --- Solve problem ---
 --- compute equation at time : 1 ---
--- at x_i = 1
--- at x_i = 2
--- at x_i = 3
--- at x_i = 4
--- at x_i = 5
--- at x_i = 6
--- at x_i = 7
--- at x_i = 8
--- at x_i = 9
--- at x_i = 10
--- at x_i = 11
+-- at x_i = 1; U_i = 0.037524
+-- at x_i = 2; U_i = 0.0386668
+-- at x_i = 3; U_i = 0.0394479
+-- at x_i = 4; U_i = 0.0398444
+-- at x_i = 5; U_i = 0.0398444
+-- at x_i = 6; U_i = 0.0394479
+-- at x_i = 7; U_i = 0.0386668
+-- at x_i = 8; U_i = 0.037524
+-- at x_i = 9; U_i = 0.0360527
+-- at x_i = 10; U_i = 0.0342944
 --- compute equation at time : 1.5 ---
--- at x_i = 1
--- at x_i = 2
--- at x_i = 3
--- at x_i = 4
--- at x_i = 5
--- at x_i = 6
--- at x_i = 7
--- at x_i = 8
--- at x_i = 9
--- at x_i = 10
--- at x_i = 11
+-- at x_i = 1; U_i = 0.0181906
+-- at x_i = 2; U_i = 0.0380954
+-- at x_i = 3; U_i = 0.0390574
+-- at x_i = 4; U_i = 0.0396462
+-- at x_i = 5; U_i = 0.0398444
+-- at x_i = 6; U_i = 0.0396462
+-- at x_i = 7; U_i = 0.0390574
+-- at x_i = 8; U_i = 0.0380954
+-- at x_i = 9; U_i = 0.0367884
+-- at x_i = 10; U_i = 0.0351735
 --- compute equation at time : 2 ---
--- at x_i = 1
--- at x_i = 2
--- at x_i = 3
--- at x_i = 4
--- at x_i = 5
--- at x_i = 6
--- at x_i = 7
--- at x_i = 8
--- at x_i = 9
--- at x_i = 10
--- at x_i = 11
+-- at x_i = 1; U_i = -0.000857083
+-- at x_i = 2; U_i = 0.028143
+-- at x_i = 3; U_i = 0.0385764
+-- at x_i = 4; U_i = 0.0393518
+-- at x_i = 5; U_i = 0.0397453
+-- at x_i = 6; U_i = 0.0397453
+-- at x_i = 7; U_i = 0.0393518
+-- at x_i = 8; U_i = 0.0385764
+-- at x_i = 9; U_i = 0.0374419
+-- at x_i = 10; U_i = 0.035981
 --- compute equation at time : 2.5 ---
--- at x_i = 1
--- at x_i = 2
--- at x_i = 3
--- at x_i = 4
--- at x_i = 5
--- at x_i = 6
--- at x_i = 7
--- at x_i = 8
--- at x_i = 9
--- at x_i = 10
--- at x_i = 11
+-- at x_i = 1; U_i = -0.0149286
+-- at x_i = 2; U_i = 0.013643
+-- at x_i = 3; U_i = 0.0333597
+-- at x_i = 4; U_i = 0.0389641
+-- at x_i = 5; U_i = 0.0395485
+-- at x_i = 6; U_i = 0.0397453
+-- at x_i = 7; U_i = 0.0395485
+-- at x_i = 8; U_i = 0.0389641
+-- at x_i = 9; U_i = 0.0380091
+-- at x_i = 10; U_i = 0.0367114
 --- compute equation at time : 3 ---
--- at x_i = 1
--- at x_i = 2
--- at x_i = 3
--- at x_i = 4
--- at x_i = 5
--- at x_i = 6
--- at x_i = 7
--- at x_i = 8
--- at x_i = 9
--- at x_i = 10
--- at x_i = 11
+-- at x_i = 1; U_i = -0.0217501
+-- at x_i = 2; U_i = -0.000642813
+-- at x_i = 3; U_i = 0.0235013
+-- at x_i = 4; U_i = 0.0361619
+-- at x_i = 5; U_i = 0.0392563
+-- at x_i = 6; U_i = 0.0396469
+-- at x_i = 7; U_i = 0.0396469
+-- at x_i = 8; U_i = 0.0392563
+-- at x_i = 9; U_i = 0.0384866
+-- at x_i = 10; U_i = 0.0373603
 --- compute equation at time : 3.5 ---
--- at x_i = 1
--- at x_i = 2
--- at x_i = 3
--- at x_i = 4
--- at x_i = 5
--- at x_i = 6
--- at x_i = 7
--- at x_i = 8
--- at x_i = 9
--- at x_i = 10
--- at x_i = 11
+-- at x_i = 1; U_i = -0.0214287
+-- at x_i = 2; U_i = -0.0111964
+-- at x_i = 3; U_i = 0.0114293
+-- at x_i = 4; U_i = 0.0298316
+-- at x_i = 5; U_i = 0.0377091
+-- at x_i = 6; U_i = 0.0394516
+-- at x_i = 7; U_i = 0.0396469
+-- at x_i = 8; U_i = 0.0394516
+-- at x_i = 9; U_i = 0.0388715
+-- at x_i = 10; U_i = 0.0379234
 --- compute equation at time : 4 ---
--- at x_i = 1
--- at x_i = 2
--- at x_i = 3
--- at x_i = 4
--- at x_i = 5
--- at x_i = 6
--- at x_i = 7
--- at x_i = 8
--- at x_i = 9
--- at x_i = 10
--- at x_i = 11
+-- at x_i = 1; U_i = -0.0158305
+-- at x_i = 2; U_i = -0.0163126
+-- at x_i = 3; U_i = 0.00011641
+-- at x_i = 4; U_i = 0.0206304
+-- at x_i = 5; U_i = 0.0337704
+-- at x_i = 6; U_i = 0.0385804
+-- at x_i = 7; U_i = 0.0395493
+-- at x_i = 8; U_i = 0.0395493
+-- at x_i = 9; U_i = 0.0391615
+-- at x_i = 10; U_i = 0.0383975
 --- compute equation at time : 4.5 ---
--- at x_i = 1
--- at x_i = 2
--- at x_i = 3
--- at x_i = 4
--- at x_i = 5
--- at x_i = 6
--- at x_i = 7
--- at x_i = 8
--- at x_i = 9
--- at x_i = 10
--- at x_i = 11
-[       OK ] UnitaryTest.ProblemTest (0 ms)
+-- at x_i = 1; U_i = -0.00767417
+-- at x_i = 2; U_i = -0.0160715
+-- at x_i = 3; U_i = -0.00809808
+-- at x_i = 4; U_i = 0.0103734
+-- at x_i = 5; U_i = 0.0272004
+-- at x_i = 6; U_i = 0.0361754
+-- at x_i = 7; U_i = 0.0390648
+-- at x_i = 8; U_i = 0.0395493
+-- at x_i = 9; U_i = 0.0393554
+-- at x_i = 10; U_i = 0.0387795
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Failed.
+"UnitaryTest.ProblemTest" end time: Nov 23 03:13 CET
+"UnitaryTest.ProblemTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: UnitaryTest.EquationTest
+3/4 Test: UnitaryTest.EquationTest
+Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.EquationTest" "--gtest_also_run_disabled_tests"
+Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
+"UnitaryTest.EquationTest" start time: Nov 23 03:13 CET
+Output:
+----------------------------------------------------------
+Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
+Note: Google Test filter = UnitaryTest.EquationTest
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from UnitaryTest
+[ RUN      ] UnitaryTest.EquationTest
+-- at x_i = 1; U_i = 0
+-- at x_i = 2; U_i = 0
+-- at x_i = 3; U_i = 0
+-- at x_i = 4; U_i = 0
+-- at x_i = 5; U_i = 0
+-- at x_i = 6; U_i = 0
+-- at x_i = 7; U_i = 0
+-- at x_i = 8; U_i = 0
+-- at x_i = 9; U_i = 1
+-- at x_i = 10; U_i = 2
+[       OK ] UnitaryTest.EquationTest (0 ms)
 [----------] 1 test from UnitaryTest (0 ms total)
 
 [----------] Global test environment tear-down
@@ -147,35 +170,29 @@ Note: Google Test filter = UnitaryTest.ProblemTest
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.ProblemTest" end time: Nov 16 10:30 CET
-"UnitaryTest.ProblemTest" time elapsed: 00:00:00
+"UnitaryTest.EquationTest" end time: Nov 23 03:13 CET
+"UnitaryTest.EquationTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-3/3 Testing: MainFunctionTest.EquationTest
-3/3 Test: MainFunctionTest.EquationTest
-Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=MainFunctionTest.EquationTest" "--gtest_also_run_disabled_tests"
+4/4 Testing: UnitaryTest.VariableTest
+4/4 Test: UnitaryTest.VariableTest
+Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.VariableTest" "--gtest_also_run_disabled_tests"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"MainFunctionTest.EquationTest" start time: Nov 16 10:30 CET
+"UnitaryTest.VariableTest" start time: Nov 23 03:13 CET
 Output:
 ----------------------------------------------------------
 Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
-Note: Google Test filter = MainFunctionTest.EquationTest
+Note: Google Test filter = UnitaryTest.VariableTest
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
-[----------] 1 test from MainFunctionTest
-[ RUN      ] MainFunctionTest.EquationTest
-[       OK ] MainFunctionTest.EquationTest (0 ms)
-[----------] 1 test from MainFunctionTest (0 ms total)
-
-[----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (0 ms total)
-[  PASSED  ] 1 test.
+[----------] 1 test from UnitaryTest
+[ RUN      ] UnitaryTest.VariableTest
 <end of output>
 Test time =   0.01 sec
 ----------------------------------------------------------
-Test Passed.
-"MainFunctionTest.EquationTest" end time: Nov 16 10:30 CET
-"MainFunctionTest.EquationTest" time elapsed: 00:00:00
+Test Failed.
+"UnitaryTest.VariableTest" end time: Nov 23 03:13 CET
+"UnitaryTest.VariableTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Nov 16 10:30 CET
+End testing: Nov 23 03:13 CET

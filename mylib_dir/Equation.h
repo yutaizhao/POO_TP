@@ -2,6 +2,9 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
+#include <concepts>
+#include <type_traits>
+
 static const float CFL = 0.5;
 
 class IMesh{
@@ -85,20 +88,40 @@ class Variable{
 
 };
 
-
+//https://en.cppreference.com/w/cpp/language/constraints
+//https://en.cppreference.com/w/cpp/types/is_object
+//https://en.cppreference.com/w/cpp/types/is_function
+//https://www.jianshu.com/p/826c6c80d089
+//https://en.cppreference.com/w/cpp/compiler_support
 class Equation{
     public :
     float a = -1 ; //= CFL*(*imesh).get_dx()/(*imesh).get_dt();
     void compute(IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1);//
+    
+    
     template<typename T>
+    /*
+    concept hasop =  std::is_function<T>::value;
+    template<hasop T>
+     */
     void compute_initial_condition(IMesh* imesh,Variable & v,T f); //donne U_0 = U(X_0,t_n)
+    
     template<class C>
+    /*
+    concept hasupdate = requires(C aclass){aclass::update();};
+    template<hasupdate C>
+     */
     void compute_for_scheme(float a, IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1){
         C::update( a, imesh, u_n, u_np1);
     }
 };
 
+
 template<typename T>
+/*
+concept hasop =  std::is_function<T>::value;
+template<hasop T>
+ */
 void Equation::compute_initial_condition(IMesh* imesh,Variable& v,T f){
     for(int i =0; i<= (*imesh).x_size();++i){
         float mu = ((*imesh).get_pos_fin() - (*imesh).get_pos_init())/2;
@@ -122,5 +145,13 @@ class Upwind{
 
 class LaxWendroff{
     public :
-    static void update(float a, IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1 ){}
+    static void update(float a, IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1 ){
+        for(int i =1; i< (*imesh).x_size();++i){
+            u_np1[i] =u_n[i] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(u_n[i+1] - u_n[i-1]) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(u_n[i+1] + 2*u_n[i] - u_n[i-1]);
+            
+        }
+        u_np1[0] =u_n[0] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(u_n[1] - 0) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(u_n[1] + 2*u_n[0] - 0);
+        u_np1[(*imesh).x_size()] =u_n[(*imesh).x_size()] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(0 - u_n[(*imesh).x_size()-1]) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(0+ 2*u_n[(*imesh).x_size()] - u_n[(*imesh).x_size()-1]);
+        u_n = u_np1;
+    }
 };
