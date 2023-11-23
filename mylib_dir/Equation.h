@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <concepts>
 #include <type_traits>
+#include <string>
 
 static const float CFL = 0.5;
 
@@ -16,7 +17,7 @@ class IMesh{
     virtual float get_pos_fin()const {return -1;};
     virtual float get_dx() const{return -1;};
     int x_size()const{return (get_pos_fin()-get_pos_init())/get_dx();}
-    int x_i(int i)const{return get_pos_init()+ get_dx()*i;}
+    float x_i(int i)const{return get_pos_init()+ get_dx()*i;}
     virtual ~IMesh() = default;
 };
 
@@ -85,7 +86,12 @@ class Variable{
     
     std::vector<float> u_n ; //donne les solutions avec t fixe et x varie
     std::vector<float> u_np1 ; //
-
+    std::vector<float> u_ref ;
+    
+    std::string m_name;
+    void print(std::vector<float> const & vec){
+        for (float val : vec) std::cout << val << std::endl;
+    }
 };
 
 //https://en.cppreference.com/w/cpp/language/constraints
@@ -97,7 +103,7 @@ class Equation{
     public :
     float a = -1 ; //= CFL*(*imesh).get_dx()/(*imesh).get_dt();
     void compute(IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1);//
-    
+    void compute_exact_solution (IMesh* imesh, Variable & v, float t);
     
     template<typename T>
     /*
@@ -131,6 +137,7 @@ void Equation::compute_initial_condition(IMesh* imesh,Variable& v,T f){
         v[i] = f(lam,mu,pi,xi);
     }
 }
+
 
 class Upwind{
     public :

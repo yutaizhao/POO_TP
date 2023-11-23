@@ -10,16 +10,16 @@ TEST(UnitaryTest,MeshTest){
 
 TEST(UnitaryTest,ProblemTest){
     
-    UniformMesh unimesh{1,5,0.5,1,10,1};
+    UniformMesh unimesh{0,2,0.1,0,10,0.1};
     Problem p_uni{&unimesh};
     p_uni.solve();
 }
 
 TEST(UnitaryTest,EquationTest){
-    UniformMesh unimesh{1,5,0.5,1,10,1};
+    UniformMesh unimesh{0,2,0.1,0,10,0.1};
     IMesh* imesh = &unimesh;
     std::vector<float> u_n = {0,0,0,0,0};
-    std::vector<float> u_np1 = {1,2,3,4,5};
+    std::vector<float> u_np1 = {0,0,0,0,0};
     Equation eq;
     Variable var{&unimesh};
     auto f = [](float lam, float mu, float pi, float xi){return (1/(lam*sqrt(2*pi)))*exp(-pow((xi - mu),2)/(2*pow(lam,2)));};
@@ -31,7 +31,7 @@ TEST(UnitaryTest,EquationTest){
 }
 
 TEST(UnitaryTest,VariableTest){
-    UniformMesh unimesh{1,5,0.5,1,10,1};
+    UniformMesh unimesh{0,2,0.1,0,10,0.1};
     Problem p_uni{&unimesh};
     Variable var{&unimesh};
 }
