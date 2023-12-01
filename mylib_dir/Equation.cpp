@@ -1,13 +1,13 @@
 #include "Equation.h"
 
-void Equation::compute(IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1){
+void Equation::compute(IMeshPtr imesh, std::vector<float>& u_n, std::vector<float>& u_np1){
     for (float x = (*imesh).get_pos_init(); x<=(*imesh).get_pos_fin(); x=x+(*imesh).get_dx()){
         std::cout << "-- at x_i = " << x <<std::endl;
     }
     compute_for_scheme<Upwind>(a,imesh,u_n,u_np1);
 }
 
-void Equation::compute_exact_solution (IMesh* imesh, Variable & v, float t){
+void Equation::compute_exact_solution (IMeshPtr imesh, Variable & v, float t){
     int n = (*imesh).x_size();
     v.u_ref.resize(n+1,-1);
     for(int i =0; i<= n;++i){

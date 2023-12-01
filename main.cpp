@@ -19,15 +19,13 @@ int main(int argc, char** argv){
     
     switch (dic[type]) {
         case TypeMaillage::Uniform: {
-            UniformMesh unimesh{tii,tfi,dti,xii,xfi,dxi};
-            Problem p_uni{&unimesh};
+            Problem p_uni{tii,tfi,dti,xii,xfi,dxi};
             p_uni.solve();
             break;
             
         }
         case TypeMaillage::NonUniform: {
-            NonUniformMesh unimesh;
-            Problem p_nuni{&unimesh};
+            Problem p_nuni{};
             p_nuni.solve();
             break;
         }

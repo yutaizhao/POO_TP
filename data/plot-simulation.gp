@@ -1,4 +1,3 @@
-# Set terminal type and output file
 set terminal png
 set output "plot.png"
 

@@ -8,6 +8,8 @@
 #include <map>
 #include <fstream>
 
+class IMesh;
+using IMeshPtr  = std::shared_ptr<IMesh>;
 static const float CFL = 0.5;
 
 class IMesh{
@@ -70,16 +72,16 @@ class NonUniformMesh : public IMesh{
 
 
 class Variable{
-    IMesh* var_ptr_imesh = nullptr;
+    
+    IMeshPtr var_ptr_imesh;
     
     
     public :
     std::vector<float> vect; //donne les solutions avec x fixe et t varie
-    Variable(IMesh* imesh){
+    Variable(IMeshPtr imesh){
         int n = (*imesh).x_size();
         var_ptr_imesh = imesh;
         vect.resize(n+1,-1);
-        
     };
     
     float& operator[](int i){
@@ -114,22 +116,22 @@ class Variable{
 class Equation{
     public :
     float a = -1 ; //= CFL*(*imesh).get_dx()/(*imesh).get_dt();
-    void compute(IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1);//
-    void compute_exact_solution (IMesh* imesh, Variable & v, float t);
+    void compute(IMeshPtr imesh, std::vector<float>& u_n, std::vector<float>& u_np1);//
+    void compute_exact_solution (IMeshPtr imesh, Variable & v, float t);
     
     template<typename T>
     /*
     concept hasop =  std::is_function<T>::value;
     template<hasop T>
      */
-    void compute_initial_condition(IMesh* imesh,Variable & v,T f); //donne U_0 = U(X_0,t_n)
+    void compute_initial_condition(IMeshPtr imesh,Variable & v,T f); //donne U_0 = U(X_0,t_n)
     
     template<class C>
     /*
     concept hasupdate = requires(C aclass){aclass::update();};
     template<hasupdate C>
      */
-    void compute_for_scheme(float a, IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1){
+    void compute_for_scheme(float a, IMeshPtr imesh, std::vector<float>& u_n, std::vector<float>& u_np1){
         C::update( a, imesh, u_n, u_np1);
     }
 };
@@ -140,7 +142,7 @@ template<typename T>
 concept hasop =  std::is_function<T>::value;
 template<hasop T>
  */
-void Equation::compute_initial_condition(IMesh* imesh,Variable& v,T f){
+void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
     for(int i =0; i<= (*imesh).x_size();++i){
         float mu = ((*imesh).get_pos_fin() - (*imesh).get_pos_init())/2;
         float lam = 10*(*imesh).get_dx();
@@ -153,7 +155,7 @@ void Equation::compute_initial_condition(IMesh* imesh,Variable& v,T f){
 
 class Upwind{
     public :
-    static void update(float a, IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1 ){
+    static void update(float a, IMeshPtr imesh, std::vector<float>& u_n, std::vector<float>& u_np1 ){
         for(int i =1; i<= (*imesh).x_size();++i){
             u_np1[i] =u_n[i] - CFL*(u_n[i] - u_n[i-1]); //CFL = a*dt/dx = 0.5
         }
@@ -164,7 +166,7 @@ class Upwind{
 
 class LaxWendroff{
     public :
-    static void update(float a, IMesh* imesh, std::vector<float>& u_n, std::vector<float>& u_np1 ){
+    static void update(float a, IMeshPtr imesh, std::vector<float>& u_n, std::vector<float>& u_np1 ){
         for(int i =1; i< (*imesh).x_size();++i){
             u_np1[i] =u_n[i] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(u_n[i+1] - u_n[i-1]) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(u_n[i+1] + 2*u_n[i] - u_n[i-1]);
             
