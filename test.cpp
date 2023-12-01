@@ -23,7 +23,7 @@ TEST(UnitaryTest,EquationTest){
     Equation eq;
     Variable var{unimesh};
     auto f = [](float lam, float mu, float pi, float xi){return (1/(lam*sqrt(2*pi)))*exp(-pow((xi - mu),2)/(2*pow(lam,2)));};
-    eq.compute(imesh,u_n, u_np1);
+    eq.compute<Upwind>(imesh,u_n, u_np1);
     eq.compute_initial_condition(imesh,var,f);
     eq.compute_for_scheme<Upwind>(0.5,imesh,u_n,u_np1);
     eq.compute_for_scheme<LaxWendroff>(0.5,imesh,u_n,u_np1);

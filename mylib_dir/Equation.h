@@ -7,6 +7,7 @@
 #include <string>
 #include <map>
 #include <fstream>
+#include <execution>
 
 class IMesh;
 using IMeshPtr  = std::shared_ptr<IMesh>;
@@ -75,7 +76,6 @@ class Variable{
     
     IMeshPtr var_ptr_imesh;
     
-    
     public :
     std::vector<float> vect; //donne les solutions avec x fixe et t varie
     Variable(IMeshPtr imesh){
@@ -90,34 +90,43 @@ class Variable{
     
     std::vector<float> u_n ; //donne les solutions avec t fixe et x varie
     std::vector<float> u_np1 ; //
+    
+    std::vector<float> u_n_2nd_order;
+    std::vector<float> u_np1_2nd_order;
+    
     std::vector<float> u_ref ;
     
-    std::vector<std::string> m_name = {"Upwind","sol exacte"};
+    std::map<std::string,std::function<void()>> m_name;
     
+    template<typename T>
+        void registerClass(const std::string& className, float a) {
+            m_name[className] = [&]() { T().update(a,var_ptr_imesh,u_n,u_np1); };
+        }
+
     void print(int t){
         //data load
-        std::ofstream data("../data/Variable_u_np1_"+std::to_string(t)+".data");
-        
-        std::cout << m_name[0] <<";"<< m_name[1] << std::endl;
-        data << m_name[0] <<";"<< m_name[1] << std::endl;
-        for (int i= 0;  i<= (*var_ptr_imesh).x_size();++i) {
-            std::cout << u_np1[i] << ";" << u_ref[i] << std::endl;
-            data << u_np1[i] << ";" << u_ref[i] <<  std::endl;
+            std::ofstream data("../data/Variable_u_np1_"+std::to_string(t)+".data");
+            std::cout << "Upwind" <<";"<< "Solexacte" << std::endl;
+            data << "Upwind" <<";"<< "Solexacte" << std::endl;
+            
+                for (int i= 0;  i<= (*var_ptr_imesh).x_size();++i) {
+                    std::cout << u_np1[i] << ";" << u_ref[i] << std::endl;
+                    data << u_np1[i] << ";" << u_ref[i] <<  std::endl;
+                }
+                data.close();
+
         }
-        data.close();
-    }
 };
 
-//https://en.cppreference.com/w/cpp/language/constraints
-//https://en.cppreference.com/w/cpp/types/is_object
-//https://en.cppreference.com/w/cpp/types/is_function
-//https://www.jianshu.com/p/826c6c80d089
-//https://en.cppreference.com/w/cpp/compiler_support
 class Equation{
     public :
     float a = -1 ; //= CFL*(*imesh).get_dx()/(*imesh).get_dt();
-    void compute(IMeshPtr imesh, std::vector<float>& u_n, std::vector<float>& u_np1);//
+    
     void compute_exact_solution (IMeshPtr imesh, Variable & v, float t);
+    
+    
+    template<class C>
+    void compute(IMeshPtr imesh, std::vector<float>& u_n, std::vector<float>& u_np1);//
     
     template<typename T>
     /*
@@ -136,6 +145,14 @@ class Equation{
     }
 };
 
+template<class C>
+void Equation::compute(IMeshPtr imesh, std::vector<float>& u_n, std::vector<float>& u_np1){
+    for (float x = (*imesh).get_pos_init(); x<=(*imesh).get_pos_fin(); x=x+(*imesh).get_dx()){
+        std::cout << "-- at x_i = " << x <<std::endl;
+    }
+    compute_for_scheme<C>(a,imesh,u_n,u_np1);
+}
+
 
 template<typename T>
 /*
@@ -149,6 +166,8 @@ void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
         float xi = (*imesh).x_i(i);
         float pi = 4*atan(1);
         v[i] = f(lam,mu,pi,xi);
+        v.u_n[i] = v[i];
+        v.u_n_2nd_order[i] = v[i];
     }
 }
 

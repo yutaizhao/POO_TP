@@ -16,7 +16,7 @@ class Problem{
     }
     
     
-    void solve();//donnee t_i
+    void solve();
     
 };
 
