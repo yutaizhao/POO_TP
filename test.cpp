@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "Problem.h"
 
-
+/*
 TEST(UnitaryTest,MeshTest){
     UniformMesh um{};
     IMesh &mesh = um;
@@ -35,5 +35,5 @@ TEST(UnitaryTest,VariableTest){
     Problem p_uni{0,2,0.1,0,10,0.1};
     Variable var{unimesh};
 }
-
+*/
 

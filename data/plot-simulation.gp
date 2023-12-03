@@ -10,7 +10,8 @@ set yrange [0:0.4]
 # Plot the data
 plot datafile using 1:2 with lines title "Init Condition", \
      datafile using 1:3 with lines title "Upwind Solution", \
-     datafile using 1:4 with lines title "Exact solution"
+     datafile using 1:4 with lines title "Lax solution", \
+     datafile using 1:5 with lines title "Exacte solution" 
 
 # Add labels and title
 set xlabel "t"
