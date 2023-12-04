@@ -14,7 +14,7 @@ using IMeshPtr  = std::shared_ptr<IMesh>;
 static const float CFL = 0.5;
 
 class IMesh{
-    public:
+public:
     virtual float get_tmp_init()const{return -1;};
     virtual float get_tmp_fin() const{return -1;};
     virtual float get_dt() const{return -1;};
@@ -34,15 +34,15 @@ class UniformMesh : public IMesh{
     float x_min = 0;
     float x_max = 5;
     float dx = 2;
-    public:
+public:
     UniformMesh() = default;
     UniformMesh(float ti,float tf,float td,float xi,float xf,float xd){
-         t_ini = ti;
-         t_final = tf;
-         dt = td;
-         x_min = xi;
-         x_max = xf;
-         dx = xd;
+        t_ini = ti;
+        t_final = tf;
+        dt = td;
+        x_min = xi;
+        x_max = xf;
+        dx = xd;
     }
     
     float get_tmp_init() const override  ;
@@ -61,7 +61,7 @@ class NonUniformMesh : public IMesh{
     float x_min = 0;
     float x_max = 5;
     float dx = 2;
-    public:
+public:
     float get_tmp_init() const override  ;
     float get_tmp_fin() const override ;
     float get_dt() const override ;
@@ -79,7 +79,7 @@ class Variable{
     std::vector<float> vect; //donne les solutions avec t fixe et x[i] varie
     
     public :
-   
+    
     Variable(IMeshPtr imesh, std::string name){
         int n = (*imesh).x_size();
         var_ptr_imesh = imesh;
@@ -93,15 +93,15 @@ class Variable{
     
     void print(int t){
         //data load
-            std::ofstream data("../data/Variable_"+m_name+"_"+std::to_string(t)+".data");
-            std::cout << m_name << std::endl;
-            data << m_name << std::endl;
-            for (int i= 0;  i<= (*var_ptr_imesh).x_size();++i) {
-                std::cout << vect[i] << std::endl;
-                data << vect[i] <<  std::endl;
-            }
-            data.close();
+        std::ofstream data("../data/Variable_"+m_name+"_"+std::to_string(t)+".data");
+        std::cout << m_name << std::endl;
+        data << m_name << std::endl;
+        for (int i= 0;  i<= (*var_ptr_imesh).x_size();++i) {
+            std::cout << vect[i] << std::endl;
+            data << vect[i] <<  std::endl;
         }
+        data.close();
+    }
 };
 
 class Equation{
@@ -116,15 +116,15 @@ class Equation{
     
     template<typename T>
     /*
-    concept hasop =  std::is_function<T>::value;
-    template<hasop T>
+     concept hasop =  std::is_function<T>::value;
+     template<hasop T>
      */
     void compute_initial_condition(IMeshPtr imesh,Variable & v,T f); //donne U_0 = U(X_0,t_n)
     
     template<class C>
     /*
-    concept hasupdate = requires(C aclass){aclass::update();};
-    template<hasupdate C>
+     concept hasupdate = requires(C aclass){aclass::update();};
+     template<hasupdate C>
      */
     void compute_for_scheme(IMeshPtr imesh, Variable& u_n, Variable& u_np1){
         a = CFL*(*imesh).get_dx()/(*imesh).get_dt();
@@ -138,14 +138,14 @@ void Equation::compute(IMeshPtr imesh, Variable& u_n, Variable& u_np1){
         std::cout << "-- at x_i = " << x <<std::endl;
     }
     compute_for_scheme<C>(imesh,u_n,u_np1);
-    u_n = u_np1;
+    u_n = u_np1; // be carefull c'est une reference donc u_np1 modifiied => u_n also ?
 }
 
 
 template<typename T>
 /*
-concept hasop =  std::is_function<T>::value;
-template<hasop T>
+ concept hasop =  std::is_function<T>::value;
+ template<hasop T>
  */
 void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
     float mu = ((*imesh).get_pos_fin() - (*imesh).get_pos_init())/2;

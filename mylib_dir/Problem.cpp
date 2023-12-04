@@ -4,17 +4,18 @@ void Problem::solve(){
     
     int n = (*ptr_imesh).x_size();
     
-    Variable u_n {ptr_imesh, "u_n"};
-    Variable u_np1 {ptr_imesh, "u_np1" };
-    Variable u_n_2nd_order {ptr_imesh, "u_n_2nd_order" };
-    Variable u_np1_2nd_order {ptr_imesh, "u_np1_2nd_order"};
+    Variable u_n {ptr_imesh, "ordre_1"};
+    Variable u_np1 {ptr_imesh, "ordre_1" };
+    Variable u_n_2nd_order {ptr_imesh, "ordre_2" };
+    Variable u_np1_2nd_order {ptr_imesh, "ordre_2"};
     
     Variable u_ref {ptr_imesh,"u_ref"};
     Variable u_init {ptr_imesh,"u_init"};
     
     
+    
     auto f = [](float lam, float mu, float pi, float xi){return (1/(lam*sqrt(2*pi)))*exp(-pow((xi - mu),2)/(2*pow(lam,2)));};
-
+    
     eq.compute_initial_condition(ptr_imesh,u_init,f);
     eq.compute_initial_condition(ptr_imesh,u_n,f);
     eq.compute_initial_condition(ptr_imesh,u_n_2nd_order,f);
@@ -27,6 +28,7 @@ void Problem::solve(){
         u_n_2nd_order.print(t/(*ptr_imesh).get_dt());
         
         eq.compute_exact_solution (ptr_imesh, u_ref, t);
+        
         eq.compute<Upwind>(ptr_imesh, u_n, u_np1);
         eq.compute<LaxWendroff>(ptr_imesh, u_n_2nd_order, u_np1_2nd_order);
         

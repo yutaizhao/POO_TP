@@ -8,7 +8,7 @@ class Problem{
     
     public :
     Problem(float ti,float tf,float td,float xi,float xf,float xd){
-        ptr_imesh = std::make_shared<UniformMesh>( ti, tf, td, xi, xf, xd);
+        ptr_imesh = std::make_shared<UniformMesh>( ti, tf, td, xi, xf, xd); //version optimisee de ce qui eest demande en td1
     }
     Problem(){
         ptr_imesh = std::make_shared<NonUniformMesh>();
