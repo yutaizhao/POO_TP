@@ -7,6 +7,7 @@
 #include <string>
 #include <map>
 #include <fstream>
+#include <numeric>
 #include <execution>
 
 class IMesh;
@@ -148,14 +149,11 @@ template<typename T>
  template<hasop T>
  */
 void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
-    float mu = ((*imesh).get_pos_fin() - (*imesh).get_pos_init())/2;
-    float sig = 10*(*imesh).get_dx();
-    float pi = 4*atan(1);
-    
-    for(int i =0; i<= (*imesh).x_size();++i){
-        float xi = (*imesh).x_i(i);
-        v[i] = f(sig,mu,pi,xi);
-    }
+     
+    std::vector<int> index((imesh->x_size())+1);
+    std::iota(index.begin(), index.end(), 0);
+    std::for_each(index.begin(),index.end(),[&v,f,imesh](float i){ v[i] = f(imesh->x_i(i)); } );
+
 }
 
 

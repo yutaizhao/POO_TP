@@ -12,11 +12,14 @@ void Problem::solve(){
     Variable u_ref {ptr_imesh,"u_ref"};
     Variable u_init {ptr_imesh,"u_init"};
     
+    float mu = ((*ptr_imesh).get_pos_fin() - (*ptr_imesh).get_pos_init())/2;
+    float sig = 10*(*ptr_imesh).get_dx();
+    float pi = 4*atan(1);
     
-    
-    auto f = [](float lam, float mu, float pi, float xi){return (1/(lam*sqrt(2*pi)))*exp(-pow((xi - mu),2)/(2*pow(lam,2)));};
+    auto f = [sig, mu, pi](float xi){return (1/(sig*sqrt(2*pi)))*exp(-pow((xi - mu),2)/(2*pow(sig,2)));};
     
     eq.compute_initial_condition(ptr_imesh,u_init,f);
+    
     eq.compute_initial_condition(ptr_imesh,u_n,f);
     eq.compute_initial_condition(ptr_imesh,u_n_2nd_order,f);
     
