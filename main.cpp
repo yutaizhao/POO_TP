@@ -4,6 +4,11 @@
 
 
 int main(int argc, char** argv){
+    
+    Timer prog{};
+    
+    prog.start("programme");
+    
     if(argc!=8){perror("not enough args");}
     
     float tii = std::stof(argv[1]);
@@ -30,6 +35,10 @@ int main(int argc, char** argv){
             break;
         }
     }
+    
+    prog.stop();
+    
+    prog.print();
     
     return 0;
 }

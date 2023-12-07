@@ -9,6 +9,9 @@
 #include <fstream>
 #include <numeric>
 #include <execution>
+#include <chrono>
+#include <ratio>
+#include <thread>
 
 class IMesh;
 using IMeshPtr  = std::shared_ptr<IMesh>;
@@ -100,18 +103,7 @@ class Variable{
         return vect.end();
     }
     
-    void print(int t){
-        //data load
-        std::ofstream data("../data/Variable_"+m_name+"_"+std::to_string(t)+".data");
-        std::cout << m_name << std::endl;
-        data << m_name << std::endl;
-        
-        std::for_each(this->begin(),this->end(),[&data](auto vi){
-            std::cout << vi << std::endl;
-            data << vi <<  std::endl;
-        });
-        data.close();
-    }
+    void print(int t);
     
 };
 
@@ -122,35 +114,14 @@ class Equation{
     void compute_exact_solution (IMeshPtr imesh, Variable & u_ref, float t);
     
     
-    template<class C>
     void compute(IMeshPtr imesh, Variable& u_n, Variable& u_np1);//
     
     template<typename T>
-    /*
-     concept hasop =  std::is_function<T>::value;
-     template<hasop T>
-     */
-    void compute_initial_condition(IMeshPtr imesh,Variable & v,T f); //donne U_0 = U(X_0,t_n)
+    void compute_initial_condition(IMeshPtr imesh,Variable & v,T f); //U_0 = U(X_0,t_n)
     
-    template<class C>
-    /*
-     concept hasupdate = requires(C aclass){aclass::update();};
-     template<hasupdate C>
-     */
-    void compute_for_scheme(IMeshPtr imesh, Variable& u_n, Variable& u_np1){
-        a = CFL*(*imesh).get_dx()/(*imesh).get_dt();
-        C::update( a, imesh, u_n, u_np1);
-    }
+    template<typename C>
+    void compute_for_scheme(IMeshPtr imesh, Variable& u_n, Variable& u_np1);
 };
-
-template<class C>
-void Equation::compute(IMeshPtr imesh, Variable& u_n, Variable& u_np1){
-    for (float x = (*imesh).get_pos_init(); x<=(*imesh).get_pos_fin(); x=x+(*imesh).get_dx()){
-        std::cout << "-- at x_i = " << x <<std::endl;
-    }
-    compute_for_scheme<C>(imesh,u_n,u_np1);
-    u_n = u_np1; // be carefull c'est une reference donc u_np1 modifiied => u_n also ?
-}
 
 
 template<typename T>
@@ -164,6 +135,17 @@ void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
     std::for_each(v.begin(), v.end(), [&i,imesh,f](auto& vi) {vi = f((*imesh).x_i(i)); ++i;}); 
     // otherwise, 2 solution : for_each for index i and capture v,f， but in this case i need iota => doesnt make prog faster ?
     
+}
+
+
+template<typename C>
+/*
+ concept hasupdate = requires(C aclass){aclass::update();};
+ template<hasupdate C>
+ */
+void Equation::compute_for_scheme(IMeshPtr imesh, Variable& u_n, Variable& u_np1){
+    this->a = CFL*(*imesh).get_dx()/(*imesh).get_dt();
+    C::update( a, imesh, u_n, u_np1);
 }
 
 
@@ -186,5 +168,23 @@ class LaxWendroff{
         }
         u_np1[0] =u_n[0] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(u_n[1] - 0) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(u_n[1] - 2*u_n[0] + 0);
         u_np1[(*imesh).x_size()] =u_n[(*imesh).x_size()] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(0 - u_n[(*imesh).x_size()-1]) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(0 - 2*u_n[(*imesh).x_size()] + u_n[(*imesh).x_size()-1]);
+    }
+};
+
+
+class Timer{
+    //https://en.cppreference.com/w/cpp/chrono
+    //https://en.cppreference.com/w/cpp/chrono/duration/duration_cast
+    std::string t_name;
+    std::chrono::time_point<std::chrono::high_resolution_clock> time_point_start;
+    std::chrono::time_point<std::chrono::high_resolution_clock> time_point_end;
+    
+public:
+    void start(std::string name){t_name = name; time_point_start = std::chrono::high_resolution_clock::now();}
+    void stop(){time_point_end = std::chrono::high_resolution_clock::now();}
+    void print(){
+        const std::chrono::duration<double, std::milli> fp_ms = time_point_end - time_point_start;
+        std::cout << t_name << std::endl;
+        std::cout << "fmps : " << fp_ms.count() << "ms" << std::endl;
     }
 };
