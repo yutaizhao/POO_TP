@@ -92,17 +92,27 @@ class Variable{
         return vect[i];
     }
     
+    auto begin(){
+        return vect.begin();
+    }
+    
+    auto end(){
+        return vect.end();
+    }
+    
     void print(int t){
         //data load
         std::ofstream data("../data/Variable_"+m_name+"_"+std::to_string(t)+".data");
         std::cout << m_name << std::endl;
         data << m_name << std::endl;
-        for (int i= 0;  i<= (*var_ptr_imesh).x_size();++i) {
-            std::cout << vect[i] << std::endl;
-            data << vect[i] <<  std::endl;
-        }
+        
+        std::for_each(this->begin(),this->end(),[&data](auto vi){
+            std::cout << vi << std::endl;
+            data << vi <<  std::endl;
+        });
         data.close();
     }
+    
 };
 
 class Equation{
@@ -150,10 +160,10 @@ template<typename T>
  */
 void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
      
-    std::vector<int> index((imesh->x_size())+1);
-    std::iota(index.begin(), index.end(), 0);
-    std::for_each(index.begin(),index.end(),[&v,f,imesh](float i){ v[i] = f(imesh->x_i(i)); } );
-
+    int i = 0 ;
+    std::for_each(v.begin(), v.end(), [&i,imesh,f](auto& vi) {vi = f((*imesh).x_i(i)); ++i;}); 
+    // otherwise, 2 solution : for_each for index i and capture v,f， but in this case i need iota => doesnt make prog faster ?
+    
 }
 
 
