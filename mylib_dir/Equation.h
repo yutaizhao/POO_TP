@@ -144,7 +144,6 @@ template<typename C>
  template<hasupdate C>
  */
 void Equation::compute_for_scheme(IMeshPtr imesh, Variable& u_n, Variable& u_np1){
-    this->a = CFL*(*imesh).get_dx()/(*imesh).get_dt();
     C::update( a, imesh, u_n, u_np1);
 }
 
@@ -175,16 +174,15 @@ class LaxWendroff{
 class Timer{
     //https://en.cppreference.com/w/cpp/chrono
     //https://en.cppreference.com/w/cpp/chrono/duration/duration_cast
-    std::string t_name;
     std::chrono::time_point<std::chrono::high_resolution_clock> time_point_start;
     std::chrono::time_point<std::chrono::high_resolution_clock> time_point_end;
     
 public:
-    void start(std::string name){t_name = name; time_point_start = std::chrono::high_resolution_clock::now();}
+    void start(){time_point_start = std::chrono::high_resolution_clock::now();}
     void stop(){time_point_end = std::chrono::high_resolution_clock::now();}
-    void print(){
-        const std::chrono::duration<double, std::milli> fp_ms = time_point_end - time_point_start;
-        std::cout << t_name << std::endl;
-        std::cout << "fmps : " << fp_ms.count() << "ms" << std::endl;
+    void print(std::string smth){
+        const std::chrono::duration<double, std::milli> res = time_point_end - time_point_start;
+        std::cout << smth << std::endl;
+        std::cout << res.count() << "ms" << std::endl;
     }
 };

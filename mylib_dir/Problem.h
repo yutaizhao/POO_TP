@@ -16,7 +16,7 @@ class Problem{
     
     
     void solve();
-    
+    void solve_parallel();
 };
 
 

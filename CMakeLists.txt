@@ -13,6 +13,10 @@ add_executable(test_exe test.cpp)
 #flags
 set(CMAKE_CXX_FLAGS "-fvisibility=hidden")
 
+find_package(Threads)
+target_link_libraries(prog_exe Threads::Threads)
+target_link_libraries(test_exe Threads::Threads)
+
 #指定要访问的子目录
 add_subdirectory(mylib_dir)
 

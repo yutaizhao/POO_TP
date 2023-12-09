@@ -7,7 +7,7 @@ int main(int argc, char** argv){
     
     Timer prog{};
     
-    prog.start("programme");
+    prog.start();
     
     if(argc!=8){perror("not enough args");}
     
@@ -18,6 +18,7 @@ int main(int argc, char** argv){
     float xfi = std::stof(argv[5]);
     float dxi = std::stof(argv[6]);
     char* type = argv[7];
+    int parallel = std::stoi(argv[8]);
     
     enum class TypeMaillage {Uniform, NonUniform};
     std::map<std::string, TypeMaillage> dic {{"uniform",TypeMaillage::Uniform},{"non-uniform",TypeMaillage::NonUniform}};
@@ -25,7 +26,11 @@ int main(int argc, char** argv){
     switch (dic[type]) {
         case TypeMaillage::Uniform: {
             Problem p_uni{tii,tfi,dti,xii,xfi,dxi};
-            p_uni.solve();
+            if(parallel == 0) {
+                p_uni.solve();
+            }else{
+                p_uni.solve_parallel();
+            }
             break;
             
         }
@@ -38,7 +43,7 @@ int main(int argc, char** argv){
     
     prog.stop();
     
-    prog.print();
+    prog.print("This program took :");
     
     return 0;
 }
