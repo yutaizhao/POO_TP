@@ -16,7 +16,8 @@ class Problem{
     
     
     void solve();
-    void solve_parallel();
+    void solve_parallel(); // using thread BASE
+    void solve_parallel_async(); //using async BONUS
 };
 
 

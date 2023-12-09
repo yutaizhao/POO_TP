@@ -92,6 +92,7 @@ test_exe_EXTERNAL_OBJECTS =
 
 test_exe: CMakeFiles/test_exe.dir/test.cpp.o
 test_exe: CMakeFiles/test_exe.dir/build.make
+test_exe: /usr/local/lib/libtbb.12.11.dylib
 test_exe: mylib_dir/libeq.a
 test_exe: mylib_dir/libprob.a
 test_exe: /usr/local/lib/libgtest_main.a

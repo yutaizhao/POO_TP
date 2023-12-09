@@ -17,7 +17,8 @@ void Equation::compute(IMeshPtr imesh, Variable & u_n, Variable & u_np1){
 
  void Equation::compute_exact_solution (IMeshPtr imesh, Variable & u_ref, float t){
      //NOT required to use lambda function
-
+     //std::execution::seq, for original/sequential
+     //std::execution::par, doesnt work for Apple clang
      float mu = ((*imesh).get_pos_fin() - (*imesh).get_pos_init())/2;
      float sig = 10*(*imesh).get_dx();
      float pi = 4*atan(1);
@@ -32,6 +33,8 @@ void Equation::compute(IMeshPtr imesh, Variable & u_n, Variable & u_np1){
 
 
 void Variable::print(int t){
+    //std::execution::seq, for original/sequential
+    //std::execution::par, doesnt work for Apple clang
     //data load
     std::ofstream data("../data/Variable_"+m_name+"_"+std::to_string(t)+".data");
     std::cout << m_name << std::endl;

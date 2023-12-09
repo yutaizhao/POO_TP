@@ -8,10 +8,11 @@
 #include <map>
 #include <fstream>
 #include <numeric>
-#include <execution>
 #include <chrono>
 #include <ratio>
 #include <thread>
+#include <execution>
+#include <future>
 
 class IMesh;
 using IMeshPtr  = std::shared_ptr<IMesh>;
@@ -126,20 +127,24 @@ class Equation{
 
 template<typename T>
 /*
+ doesnt work for Apple clang:
  concept hasop =  std::is_function<T>::value;
  template<hasop T>
  */
 void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
      
     int i = 0 ;
-    std::for_each(v.begin(), v.end(), [&i,imesh,f](auto& vi) {vi = f((*imesh).x_i(i)); ++i;}); 
-    // otherwise, 2 solution : for_each for index i and capture v,f， but in this case i need iota => doesnt make prog faster ?
+    std::for_each(v.begin(), v.end(), [&i,imesh,f](auto& vi) {vi = f((*imesh).x_i(i)); ++i;});
+    //std::execution::seq, for original/sequential
+    //std::execution::par, doesnt work for Apple clang
+    //2nd way to code : for_each for index i and capture v,f， but in this case i need iota => won't improve the program ?
     
 }
 
 
 template<typename C>
 /*
+ doesnt work for Apple clang:
  concept hasupdate = requires(C aclass){aclass::update();};
  template<hasupdate C>
  */

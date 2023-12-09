@@ -4,7 +4,7 @@
 # compile CXX with /Library/Developer/CommandLineTools/usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/Users/zhaoyutainazir/Prog Objet Oriente/mylib_dir"
+CXX_INCLUDES = -I"/Users/zhaoyutainazir/Prog Objet Oriente/mylib_dir" -isystem /usr/local/include
 
 CXX_FLAGS = -fvisibility=hidden -O3 -DNDEBUG -std=gnu++17 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk
 

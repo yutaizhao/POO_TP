@@ -26,11 +26,16 @@ int main(int argc, char** argv){
     switch (dic[type]) {
         case TypeMaillage::Uniform: {
             Problem p_uni{tii,tfi,dti,xii,xfi,dxi};
+            
+            //this is a swtich case but yea.....we all understand :)
             if(parallel == 0) {
                 p_uni.solve();
-            }else{
+            }else if(parallel == 1){
                 p_uni.solve_parallel();
+            }else if(parallel == 2){
+                p_uni.solve_parallel_async();
             }
+            
             break;
             
         }
