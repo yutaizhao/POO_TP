@@ -15,7 +15,7 @@
 #include <future>
 
 class IMesh;
-using IMeshPtr  = std::shared_ptr<IMesh>;
+using IMeshPtr  = IMesh*;
 static const float CFL = 0.5;
 
 class IMesh{
@@ -59,20 +59,22 @@ public:
 };
 
 class NonUniformMesh : public IMesh{
-    private :
-    float t_ini = 0;
-    float t_final = 1;
-    float dt = 0.5;
-    float x_min = 0;
-    float x_max = 5;
-    float dx = 2;
-public:
-    float get_tmp_init() const override  ;
-    float get_tmp_fin() const override ;
-    float get_dt() const override ;
-    float get_pos_init() const override  ;
-    float get_pos_fin() const override ;
-    float get_dx()const override  ;
+    /*
+     private :
+     float t_ini = 0;
+     float t_final = 1;
+     float dt = 0.5;
+     float x_min = 0;
+     float x_max = 5;
+     float dx = 2;
+     */
+    public://will get warning
+    float get_tmp_init() const override{}
+    float get_tmp_fin() const override{}
+    float get_dt() const override{}
+    float get_pos_init() const override{}
+    float get_pos_fin() const override {}
+    float get_dx()const override{}
 };
 
 

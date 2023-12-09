@@ -23,11 +23,26 @@ int main(int argc, char** argv){
     enum class TypeMaillage {Uniform, NonUniform};
     std::map<std::string, TypeMaillage> dic {{"uniform",TypeMaillage::Uniform},{"non-uniform",TypeMaillage::NonUniform}};
     
+    /*
+     Pour créer notre Problem dans le programme principal, 
+     nous lui passerons à la construction une instance de la classe équation et
+     un pointeur de UniformMesh qu'il stockera dans son pointeur de IMesh.
+     Il sera responsable de la mémoire de ce pointeur, ce sera donc à lui d'appeler le delete.
+     Vous veillerez à ce que le pointeur ne puisse pas être nul,
+     en bloquant les constructions ou affectations par copie.
+     
+     I will use raw pointer for UniformMesh as demanded in Tp2 in last versions
+     But in previous ones i used smart pointer
+     */
+    
     switch (dic[type]) {
         case TypeMaillage::Uniform: {
-            Problem p_uni{tii,tfi,dti,xii,xfi,dxi};
             
-            //this is a swtich case but yea.....we all understand :)
+            UniformMesh* ptr_UMesh = new UniformMesh{tii,tfi,dti,xii,xfi,dxi};
+            Equation eq;
+            Problem p_uni{ptr_UMesh,eq};
+            
+            //this par could be written in swtich case but yea..... complicating life
             if(parallel == 0) {
                 p_uni.solve();
             }else if(parallel == 1){
@@ -35,12 +50,18 @@ int main(int argc, char** argv){
             }else if(parallel == 2){
                 p_uni.solve_parallel_async();
             }
-            
             break;
             
         }
         case TypeMaillage::NonUniform: {
-            Problem p_nuni{};
+            /*
+             FATAL : This is only for BONUS do not run it !!!
+             Warning during compilation is due to empty NonUniformMesh methods 
+             */
+            
+            NonUniformMesh* ptr_NUMesh = new NonUniformMesh{};
+            Equation eq;
+            Problem p_nuni{ptr_NUMesh,eq};
             p_nuni.solve();
             break;
         }
