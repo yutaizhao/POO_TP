@@ -13,9 +13,10 @@
 #include <thread>
 #include <execution>
 #include <future>
+#include <sys/stat.h>
 
 class IMesh;
-using IMeshPtr  = IMesh*;
+using IMeshPtr  = std::shared_ptr<IMesh>;
 static const float CFL = 0.5;
 
 class IMesh{
@@ -68,7 +69,7 @@ class NonUniformMesh : public IMesh{
      float x_max = 5;
      float dx = 2;
      */
-    public://will get warning
+public://will get warning
     float get_tmp_init() const override{}
     float get_tmp_fin() const override{}
     float get_dt() const override{}
@@ -134,7 +135,7 @@ template<typename T>
  template<hasop T>
  */
 void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
-     
+    
     int i = 0 ;
     std::for_each(v.begin(), v.end(), [&i,imesh,f](auto& vi) {vi = f((*imesh).x_i(i)); ++i;});
     //std::execution::seq, for original/sequential
@@ -161,7 +162,8 @@ class Upwind{
         for(int i =1; i<= (*imesh).x_size();++i){
             u_np1[i] =u_n[i] - CFL*(u_n[i] - u_n[i-1]); //CFL = a*dt/dx = 0.5
         }
-        u_np1[0] =u_n[0] - CFL* (u_n[1]-0) ;
+        //avoid out of bound index
+        u_np1[0] =u_n[0] - CFL* (u_n[0]-0) ;
     }
 };
 
@@ -172,6 +174,7 @@ class LaxWendroff{
             u_np1[i] =u_n[i] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(u_n[i+1] - u_n[i-1]) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(u_n[i+1] - 2*u_n[i] + u_n[i-1]);
             
         }
+        //avoid out of bound index
         u_np1[0] =u_n[0] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(u_n[1] - 0) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(u_n[1] - 2*u_n[0] + 0);
         u_np1[(*imesh).x_size()] =u_n[(*imesh).x_size()] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(0 - u_n[(*imesh).x_size()-1]) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(0 - 2*u_n[(*imesh).x_size()] + u_n[(*imesh).x_size()-1]);
     }

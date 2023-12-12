@@ -1,0 +1,21 @@
+	#VERSION solve
+
+The time-looping took :
+92883.3ms
+This program took :
+92883.5ms
+
+	#VERSION solve_parallel
+
+The time-looping took :
+51739.1ms
+This program took :
+51739.3ms
+
+
+	#VERSION solve_solve_parallel_async
+
+The time-looping took :
+51727.7ms
+This program took :
+51728ms

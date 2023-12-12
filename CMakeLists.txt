@@ -32,8 +32,8 @@ target_link_libraries (test_exe GTest::GTest GTest::Main eq prob)
 
 #ctest : cmake 自带的test
 enable_testing()
-#add_test(prog_test prog_exe)
+add_test(prog_test prog_exe 0 2 0.1 0 10 0.1 uniform 2)
 find_package(GTest REQUIRED)
 
-#Gtest : 它是用来取代 add_test 的，通过扫描源代码，它就能读出所有的测试用例
+#Gtest : 
 gtest_discover_tests(test_exe)

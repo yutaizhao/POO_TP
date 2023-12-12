@@ -1,7 +1,6 @@
-UnitaryTest.MeshTest 41 0.000543742
-UnitaryTest.ProblemTest 32 0.00211765
-MainFunctionTest.EquationTest 25 0.00027934
-prog_test 4 0
-UnitaryTest.EquationTest 10 0.000989099
-UnitaryTest.VariableTest 14 0.000718495
+prog_test 4 0.0185494
+UnitaryTest.MeshTest 1 0.00894872
+UnitaryTest.ProblemTest 1 0.0804727
+UnitaryTest.EquationTest 1 0.020095
+UnitaryTest.VariableTest 1 0.0213198
 ---

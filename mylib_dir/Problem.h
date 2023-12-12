@@ -7,17 +7,29 @@ class Problem{
     Equation eq;
     
     public :
+    
+    /*
     Problem(UniformMesh* ptr_UMesh, Equation equation){
         ptr_imesh = ptr_UMesh;
         eq = equation ;
     }
+     
+     Problem(NonUniformMesh* ptr_NUMesh,Equation equation){
+         ptr_imesh = ptr_NUMesh;
+         eq = equation ;
+     }
+     
+     ~Problem(){ delete ptr_imesh;}
+     */
     
-    Problem(NonUniformMesh* ptr_NUMesh,Equation equation){
-        ptr_imesh = ptr_NUMesh;
-        eq = equation ;
+    Problem(float ti,float tf,float td,float xi,float xf,float xd){
+            ptr_imesh = std::make_shared<UniformMesh>( ti, tf, td, xi, xf, xd);
     }
     
-    ~Problem(){delete ptr_imesh; }
+    Problem(){
+            ptr_imesh = std::make_shared<NonUniformMesh>();
+    }
+    
     
     
     void solve();
