@@ -22,12 +22,13 @@ target_link_libraries(test_exe Threads::Threads TBB::tbb)
 add_subdirectory(mylib_dir)
 
 #mylib要包含的库.h路径
+target_include_directories(mesh PUBLIC mylib_dir)
 target_include_directories(eq PUBLIC mylib_dir)
 target_include_directories(prob PUBLIC mylib_dir)
 
 #prog依赖mylib
-target_link_libraries (prog_exe eq prob)
-target_link_libraries (test_exe GTest::GTest GTest::Main eq prob)
+target_link_libraries (prog_exe mesh eq prob)
+target_link_libraries (test_exe GTest::GTest GTest::Main mesh eq prob)
 
 
 #ctest : cmake 自带的test

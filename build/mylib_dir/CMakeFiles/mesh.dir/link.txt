@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libmesh.a CMakeFiles/mesh.dir/Mesh.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libmesh.a

@@ -153,6 +153,19 @@ test_exe/fast:
 .PHONY : test_exe/fast
 
 #=============================================================================
+# Target rules for targets named mesh
+
+# Build rule for target.
+mesh: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mesh
+.PHONY : mesh
+
+# fast build rule for target.
+mesh/fast:
+	$(MAKE) $(MAKESILENT) -f mylib_dir/CMakeFiles/mesh.dir/build.make mylib_dir/CMakeFiles/mesh.dir/build
+.PHONY : mesh/fast
+
+#=============================================================================
 # Target rules for targets named eq
 
 # Build rule for target.
@@ -236,6 +249,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... eq"
+	@echo "... mesh"
 	@echo "... prob"
 	@echo "... prog_exe"
 	@echo "... test_exe"

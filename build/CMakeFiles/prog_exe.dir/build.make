@@ -93,6 +93,7 @@ prog_exe_EXTERNAL_OBJECTS =
 prog_exe: CMakeFiles/prog_exe.dir/main.cpp.o
 prog_exe: CMakeFiles/prog_exe.dir/build.make
 prog_exe: /usr/local/lib/libtbb.12.11.dylib
+prog_exe: mylib_dir/libmesh.a
 prog_exe: mylib_dir/libeq.a
 prog_exe: mylib_dir/libprob.a
 prog_exe: CMakeFiles/prog_exe.dir/link.txt

@@ -1,6 +1,6 @@
 #include "Equation.h"
 
-//this function has been modified during thee last version
+//this function has been modified during the last version
 void Equation::compute(IMeshPtr imesh, Variable & u_n, Variable & u_np1){
     float CFL = 0.5;
     int cnt = 1;
@@ -16,13 +16,13 @@ void Equation::compute(IMeshPtr imesh, Variable & u_n, Variable & u_np1){
         cnt = cnt+1;
     }
     u_np1[0] =u_n[0] - CFL* u_n[0] ;
-    //u_n = u_np1 in Problem::solve()
+    //u_n = u_np1 is written in Problem::solve()
 }
 
 
 void Equation::compute_exact_solution (IMeshPtr imesh, Variable & u_ref, float t){
     //NOT required to use lambda function in tp
-    //std::execution::seq, for original/sequential
+
     //std::execution::par, doesnt work for Apple clang
     float mu = ((*imesh).get_pos_fin() - (*imesh).get_pos_init())/2;
     float sig = 10*(*imesh).get_dx();
@@ -37,8 +37,9 @@ void Equation::compute_exact_solution (IMeshPtr imesh, Variable & u_ref, float t
 
 
 void Variable::print(int t){
-    //std::execution::seq, for original/sequential
+    
     //std::execution::par, doesnt work for Apple clang
+    
     std::ofstream data("../data/Variable_"+m_name+"_"+std::to_string(t)+".data");
     std::cout << m_name << std::endl;
     data << m_name << std::endl;
@@ -51,22 +52,4 @@ void Variable::print(int t){
 }
 
 
-float UniformMesh::get_tmp_init  ()const{
-    return t_ini;
-}
-float UniformMesh::get_tmp_fin ()const{
-    return t_final;
-}
-float  UniformMesh::get_dt ()const{
-    return dt;
-}
-float  UniformMesh::get_pos_init ()const{
-    return x_min;
-}
-float  UniformMesh::get_pos_fin ()const{
-    return x_max;
-}
-float  UniformMesh::get_dx ()const{
-    return dx;
-}
 
