@@ -3,25 +3,45 @@
 
 
 TEST(UnitaryTest,MeshTest){
+    
     UniformMesh um{};
-    IMesh &mesh = um;
-    mesh.get_tmp_init();
+    IMesh* mesh = &um;
+    (*mesh).get_tmp_init();
+    
 }
 
 TEST(UnitaryTest,ProblemTest){
     
-    UniformMesh unimesh{0,2,0.1,0,10,0.1};
-    Problem p_uni{0,2,0.1,0,10,0.1};
+    Equation eq;
+    UniformMesh* ptr_UMesh = new UniformMesh{0,2,0.1,0,10,0.1};
+    Problem p_uni{ptr_UMesh,eq};
     p_uni.solve();
+    
+    NonUniformMesh* ptr_NUMesh = new NonUniformMesh{};
+    Problem p_nuni{ptr_NUMesh,eq};
+    
+    //BONUS
+    UniformMesh* ptr_UMesh_null =nullptr;
+    Problem p_uni_null{ptr_UMesh_null,eq};
+    p_uni_null.solve();
+    
 }
 
 TEST(UnitaryTest,EquationTest){
-    std::shared_ptr<UniformMesh> unimesh = std::make_shared<UniformMesh>(0,2,0.1,0,10,0.1);
-    std::shared_ptr<IMesh> imesh = unimesh;
-    Variable u_n{unimesh, "hi"};
-    Variable u_np1{unimesh, "hi"};
+    
+    /*
+     ici, on ne peut pas tester le cas où Equation::compute est appelée avec un IMesh*=nullptr,
+     comme compute a ete modifie aprees le tp2, allant prendre Variable comme args
+     mais Variable est aussi construit avec IMesh
+     Sinon on doit aussi faire une gestion d'erreur pour Variable
+     */
+    
+    UniformMesh* ptr_UMesh = new UniformMesh{0,2,0.1,0,10,0.1};
+    IMesh* imesh = ptr_UMesh;
+    Variable u_n{imesh, "hi"};
+    Variable u_np1{imesh, "hi"};
     Equation eq;
-    Variable var{unimesh,"hi"};
+    Variable var{imesh,"hi"};
     float lam = 1;
     float mu = 1;
     float pi = 3.14;
@@ -32,11 +52,4 @@ TEST(UnitaryTest,EquationTest){
     eq.compute_for_scheme<LaxWendroff>(imesh,u_n,u_np1);
     
 }
-
-TEST(UnitaryTest,VariableTest){
-    std::shared_ptr<UniformMesh> unimesh = std::make_shared<UniformMesh>(0,2,0.1,0,10,0.1);
-    Problem p_uni{0,2,0.1,0,10,0.1};
-    Variable var{unimesh, "hi"};
-}
-
 

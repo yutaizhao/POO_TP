@@ -2,10 +2,20 @@
 
 /*
  Due to performance tests
- code for graphe plot are commented by 
+ code for print are commented 
  */
 
 void Problem::solve(){
+    
+    try {
+        if(ptr_imesh == nullptr){
+            throw std::runtime_error{"imesh pointer is nullptr"};
+        }
+    }
+    catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
+        return ;
+    }
     
     int n = (*ptr_imesh).x_size();
     

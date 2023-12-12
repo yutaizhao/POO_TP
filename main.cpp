@@ -30,14 +30,17 @@ int main(int argc, char** argv){
         case TypeMaillage::Uniform: {
             
             /*
-             UniformMesh* ptr_UMesh = new UniformMesh{tii,tfi,dti,xii,xfi,dxi};
-             Equation eq;
-             Problem p_uni{ptr_UMesh,eq};
-             delete ptr_UMesh;
+             In previous versions smart pointers are used instad of raw pointers
+             finally changed to raw pointers as demanding in tp2
+             "using IMeshPtr" in Mesh.h to define pointer type
+             Basically have no probs after tests
              */
             
-            Problem p_uni{tii,tfi,dti,xii,xfi,dxi};
-            //this could be written in swtich case but not complicating life
+            UniformMesh* ptr_UMesh = new UniformMesh{tii,tfi,dti,xii,xfi,dxi};
+            Equation eq;
+            
+            Problem p_uni{ptr_UMesh,eq};
+             
             if(parallel == 0) {
                 p_uni.solve();
             }else if(parallel == 1){
@@ -54,12 +57,10 @@ int main(int argc, char** argv){
             
         case TypeMaillage::NonUniform: {
             
-            /*
-             NonUniformMesh* ptr_NUMesh = new NonUniformMesh{};
-             delete ptr_NUMesh;
-             */
-                Problem p_nuni{};
-                break;
+            NonUniformMesh* ptr_NUMesh = new NonUniformMesh{};
+            Equation eq;
+            Problem p_nuni{ptr_NUMesh,eq};
+            break;
             
             }
         }

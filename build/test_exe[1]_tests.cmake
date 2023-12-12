@@ -4,6 +4,4 @@ add_test([=[UnitaryTest.ProblemTest]=]  [==[/Users/zhaoyutainazir/Prog Objet Ori
 set_tests_properties([=[UnitaryTest.ProblemTest]=]  PROPERTIES WORKING_DIRECTORY [==[/Users/zhaoyutainazir/Prog Objet Oriente/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
 add_test([=[UnitaryTest.EquationTest]=]  [==[/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe]==] [==[--gtest_filter=UnitaryTest.EquationTest]==] --gtest_also_run_disabled_tests)
 set_tests_properties([=[UnitaryTest.EquationTest]=]  PROPERTIES WORKING_DIRECTORY [==[/Users/zhaoyutainazir/Prog Objet Oriente/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test([=[UnitaryTest.VariableTest]=]  [==[/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe]==] [==[--gtest_filter=UnitaryTest.VariableTest]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[UnitaryTest.VariableTest]=]  PROPERTIES WORKING_DIRECTORY [==[/Users/zhaoyutainazir/Prog Objet Oriente/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  test_exe_TESTS UnitaryTest.MeshTest UnitaryTest.ProblemTest UnitaryTest.EquationTest UnitaryTest.VariableTest)
+set(  test_exe_TESTS UnitaryTest.MeshTest UnitaryTest.ProblemTest UnitaryTest.EquationTest)

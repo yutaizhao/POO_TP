@@ -16,7 +16,7 @@
 #include <sys/stat.h>
 
 class IMesh;
-using IMeshPtr  = std::shared_ptr<IMesh>;
+using IMeshPtr  =IMesh*;
 static const float CFL = 0.5;
 
 class IMesh{
@@ -80,6 +80,7 @@ public://will get warning
 
 
 class Timer{
+    //Ref: 
     //https://en.cppreference.com/w/cpp/chrono
     //https://en.cppreference.com/w/cpp/chrono/duration/duration_cast
     

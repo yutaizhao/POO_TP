@@ -2,6 +2,17 @@
 
 //this function has been modified during the last version
 void Equation::compute(IMeshPtr imesh, Variable & u_n, Variable & u_np1){
+    
+    try {
+        if(imesh == nullptr){
+            throw std::runtime_error{"imesh pointer is nullptr"};
+        }
+    }
+    catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
+        return ;
+    }
+    
     float CFL = 0.5;
     int cnt = 1;
     

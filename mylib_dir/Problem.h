@@ -8,7 +8,7 @@ class Problem{
     
     public :
     
-    /*
+
     Problem(UniformMesh* ptr_UMesh, Equation equation){
         ptr_imesh = ptr_UMesh;
         eq = equation ;
@@ -20,17 +20,6 @@ class Problem{
      }
      
      ~Problem(){ delete ptr_imesh;}
-     */
-    
-    Problem(float ti,float tf,float td,float xi,float xf,float xd){
-            ptr_imesh = std::make_shared<UniformMesh>( ti, tf, td, xi, xf, xd);
-    }
-    
-    Problem(){
-            ptr_imesh = std::make_shared<NonUniformMesh>();
-    }
-    
-    
     
     void solve();
     void solve_parallel(); // using thread BASE

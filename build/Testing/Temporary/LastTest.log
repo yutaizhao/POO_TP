@@ -1,10 +1,10 @@
-Start testing: Dec 12 06:04 CET
+Start testing: Dec 12 08:41 CET
 ----------------------------------------------------------
-1/5 Testing: UnitaryTest.MeshTest
-1/5 Test: UnitaryTest.MeshTest
+1/4 Testing: UnitaryTest.MeshTest
+1/4 Test: UnitaryTest.MeshTest
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.MeshTest" "--gtest_also_run_disabled_tests"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"UnitaryTest.MeshTest" start time: Dec 12 06:04 CET
+"UnitaryTest.MeshTest" start time: Dec 12 08:41 CET
 Output:
 ----------------------------------------------------------
 Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
@@ -23,15 +23,15 @@ Note: Google Test filter = UnitaryTest.MeshTest
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.MeshTest" end time: Dec 12 06:04 CET
+"UnitaryTest.MeshTest" end time: Dec 12 08:41 CET
 "UnitaryTest.MeshTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-2/5 Testing: UnitaryTest.ProblemTest
-2/5 Test: UnitaryTest.ProblemTest
+2/4 Testing: UnitaryTest.ProblemTest
+2/4 Test: UnitaryTest.ProblemTest
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.ProblemTest" "--gtest_also_run_disabled_tests"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"UnitaryTest.ProblemTest" start time: Dec 12 06:04 CET
+"UnitaryTest.ProblemTest" start time: Dec 12 08:41 CET
 Output:
 ----------------------------------------------------------
 Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
@@ -4142,26 +4142,27 @@ ordre_2
 0.000168269
 0.000132779
 The time-looping took :
-59.7ms
-[       OK ] UnitaryTest.ProblemTest (61 ms)
-[----------] 1 test from UnitaryTest (61 ms total)
+74.3176ms
+imesh pointer is nullptr
+[       OK ] UnitaryTest.ProblemTest (76 ms)
+[----------] 1 test from UnitaryTest (76 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (61 ms total)
+[==========] 1 test from 1 test suite ran. (76 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.07 sec
+Test time =   0.09 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.ProblemTest" end time: Dec 12 06:04 CET
+"UnitaryTest.ProblemTest" end time: Dec 12 08:41 CET
 "UnitaryTest.ProblemTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-3/5 Testing: UnitaryTest.EquationTest
-3/5 Test: UnitaryTest.EquationTest
+3/4 Testing: UnitaryTest.EquationTest
+3/4 Test: UnitaryTest.EquationTest
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.EquationTest" "--gtest_also_run_disabled_tests"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"UnitaryTest.EquationTest" start time: Dec 12 06:04 CET
+"UnitaryTest.EquationTest" start time: Dec 12 08:41 CET
 Output:
 ----------------------------------------------------------
 Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
@@ -4274,48 +4275,21 @@ Note: Google Test filter = UnitaryTest.EquationTest
 [----------] 1 test from UnitaryTest (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (1 ms total)
-[  PASSED  ] 1 test.
-<end of output>
-Test time =   0.02 sec
-----------------------------------------------------------
-Test Passed.
-"UnitaryTest.EquationTest" end time: Dec 12 06:04 CET
-"UnitaryTest.EquationTest" time elapsed: 00:00:00
-----------------------------------------------------------
-
-4/5 Testing: UnitaryTest.VariableTest
-4/5 Test: UnitaryTest.VariableTest
-Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.VariableTest" "--gtest_also_run_disabled_tests"
-Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"UnitaryTest.VariableTest" start time: Dec 12 06:04 CET
-Output:
-----------------------------------------------------------
-Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
-Note: Google Test filter = UnitaryTest.VariableTest
-[==========] Running 1 test from 1 test suite.
-[----------] Global test environment set-up.
-[----------] 1 test from UnitaryTest
-[ RUN      ] UnitaryTest.VariableTest
-[       OK ] UnitaryTest.VariableTest (0 ms)
-[----------] 1 test from UnitaryTest (0 ms total)
-
-[----------] Global test environment tear-down
 [==========] 1 test from 1 test suite ran. (0 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.VariableTest" end time: Dec 12 06:04 CET
-"UnitaryTest.VariableTest" time elapsed: 00:00:00
+"UnitaryTest.EquationTest" end time: Dec 12 08:41 CET
+"UnitaryTest.EquationTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-5/5 Testing: prog_test
-5/5 Test: prog_test
+4/4 Testing: prog_test
+4/4 Test: prog_test
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/prog_exe" "0" "2" "0.1" "0" "10" "0.1" "uniform" "0"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"prog_test" start time: Dec 12 06:04 CET
+"prog_test" start time: Dec 12 08:41 CET
 Output:
 ----------------------------------------------------------
 --- Solve problem ---
@@ -8420,19 +8394,19 @@ ordre_2
 0.000168269
 0.000132779
 The time-looping took :
-69.165ms
+120.522ms
 This program took :
-71.5439ms
+122.58ms
 Attention : 
 -> Directory data existed...
 -> existed data was not over-written...
 -> delete directory to save new data...
 <end of output>
-Test time =   0.22 sec
+Test time =   0.14 sec
 ----------------------------------------------------------
 Test Passed.
-"prog_test" end time: Dec 12 06:04 CET
+"prog_test" end time: Dec 12 08:41 CET
 "prog_test" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Dec 12 06:04 CET
+End testing: Dec 12 08:41 CET

@@ -43,7 +43,7 @@ class Equation{
 
 template<typename T>
 /*
- doesnt work for Apple clang:
+ doesnt work for Apple clang, but tried:
  concept hasop =  std::is_function<T>::value;
  template<hasop T>
  */
@@ -51,16 +51,16 @@ void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
     
     int i = 0 ;
     std::for_each(v.begin(), v.end(), [&i,imesh,f](auto& vi) {vi = f((*imesh).x_i(i)); ++i;});
-    //std::execution::seq, for original/sequential
     //std::execution::par, doesnt work for Apple clang
-    //2nd way to code : for_each for index i and capture v,f， but in this case i need iota => won't improve the program ?
+    //2nd way to code :
+    //for_each for index i and capture v,f， but in this case i need iota => won't improve the program ?
     
 }
 
 
 template<typename C>
 /*
- doesnt work for Apple clang:
+ doesnt work for Apple clang, but tried:
  concept hasupdate = requires(C aclass){aclass::update();};
  template<hasupdate C>
  */
