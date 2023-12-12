@@ -44,8 +44,8 @@ int main(int argc, char** argv){
                 p_uni.solve_parallel();
             }else if(parallel == 2){
                 p_uni.solve_parallel_async();
-                break;
             }
+            break;
         }
             /*
              This is only for BONUS, do nothing.
