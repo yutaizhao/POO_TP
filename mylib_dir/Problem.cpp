@@ -50,14 +50,14 @@ void Problem::solve(){
     time_loop.stop();
     time_loop.print("The time-looping took :");
     
-    /*
+    
     std::ofstream graphe("../data/graphe.data");
     
     for(int i =0; i<= n;++i){
         graphe << (*ptr_imesh).x_i(i) << " " << u_init[i] << " " << u_n[i] << " " << u_n_2nd_order[i] <<" " <<u_ref[i] <<  std::endl;
     }
     graphe.close();
-     */
+     
     
     
     
@@ -137,13 +137,13 @@ void Problem::solve_parallel(){
     time_loop.stop();
     time_loop.print("The time-looping took :");
     
-    /*
+    
      std::ofstream graphe("../data/graphe.data");
      for(int i =0; i<= n;++i){
      graphe << (*ptr_imesh).x_i(i) << " " << u_init[i] << " " << u_n[i] << " " << u_n_2nd_order[i] <<" " <<u_ref[i] <<  std::endl;
      }
      graphe.close();
-     */
+     
     
     
 }
@@ -220,13 +220,13 @@ void Problem::solve_parallel_async(){
     time_loop.stop();
     time_loop.print("The time-looping took :");
     
-    /*
+    
      std::ofstream graphe("../data/graphe.data");
      for(int i =0; i<= n;++i){
      graphe << (*ptr_imesh).x_i(i) << " " << u_init[i] << " " << u_n[i] << " " << u_n_2nd_order[i] <<" " <<u_ref[i] <<  std::endl;
      }
      graphe.close();
-     */
+     
     
     
 }

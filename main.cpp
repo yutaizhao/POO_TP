@@ -68,7 +68,7 @@ int main(int argc, char** argv){
     prog.print("This program took :");
     
     if(res != 0){
-        std::cout << "Attention : new data unsaved..." << std::endl;
+        std::cout << "Attention : " << std::endl;
         std::cout << "-> Directory data existed..." << std::endl;
         std::cout << "-> existed data was not over-written..." << std::endl;
         std::cout << "-> delete directory to save new data..." << std::endl;

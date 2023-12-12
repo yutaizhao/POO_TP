@@ -32,7 +32,7 @@ target_link_libraries (test_exe GTest::GTest GTest::Main eq prob)
 
 #ctest : cmake 自带的test
 enable_testing()
-add_test(prog_test prog_exe 0 2 0.1 0 10 0.1 uniform 2)
+add_test(prog_test prog_exe 0 2 0.1 0 10 0.1 uniform 0)
 find_package(GTest REQUIRED)
 
 #Gtest : 
