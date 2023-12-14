@@ -1,10 +1,10 @@
-Start testing: Dec 12 08:41 CET
+Start testing: Dec 14 14:48 CET
 ----------------------------------------------------------
 1/4 Testing: UnitaryTest.MeshTest
 1/4 Test: UnitaryTest.MeshTest
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.MeshTest" "--gtest_also_run_disabled_tests"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"UnitaryTest.MeshTest" start time: Dec 12 08:41 CET
+"UnitaryTest.MeshTest" start time: Dec 14 14:48 CET
 Output:
 ----------------------------------------------------------
 Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
@@ -23,7 +23,7 @@ Note: Google Test filter = UnitaryTest.MeshTest
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.MeshTest" end time: Dec 12 08:41 CET
+"UnitaryTest.MeshTest" end time: Dec 14 14:48 CET
 "UnitaryTest.MeshTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -31,7 +31,7 @@ Test Passed.
 2/4 Test: UnitaryTest.ProblemTest
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.ProblemTest" "--gtest_also_run_disabled_tests"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"UnitaryTest.ProblemTest" start time: Dec 12 08:41 CET
+"UnitaryTest.ProblemTest" start time: Dec 14 14:48 CET
 Output:
 ----------------------------------------------------------
 Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
@@ -4142,19 +4142,19 @@ ordre_2
 0.000168269
 0.000132779
 The time-looping took :
-74.3176ms
+69.2885ms
 imesh pointer is nullptr
-[       OK ] UnitaryTest.ProblemTest (76 ms)
-[----------] 1 test from UnitaryTest (76 ms total)
+[       OK ] UnitaryTest.ProblemTest (71 ms)
+[----------] 1 test from UnitaryTest (71 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (76 ms total)
+[==========] 1 test from 1 test suite ran. (71 ms total)
 [  PASSED  ] 1 test.
 <end of output>
-Test time =   0.09 sec
+Test time =   0.08 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.ProblemTest" end time: Dec 12 08:41 CET
+"UnitaryTest.ProblemTest" end time: Dec 14 14:48 CET
 "UnitaryTest.ProblemTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -4162,7 +4162,7 @@ Test Passed.
 3/4 Test: UnitaryTest.EquationTest
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/test_exe" "--gtest_filter=UnitaryTest.EquationTest" "--gtest_also_run_disabled_tests"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"UnitaryTest.EquationTest" start time: Dec 12 08:41 CET
+"UnitaryTest.EquationTest" start time: Dec 14 14:48 CET
 Output:
 ----------------------------------------------------------
 Running main() from /Users/zhaoyutainazir/googletest/googletest/src/gtest_main.cc
@@ -4281,7 +4281,7 @@ Note: Google Test filter = UnitaryTest.EquationTest
 Test time =   0.02 sec
 ----------------------------------------------------------
 Test Passed.
-"UnitaryTest.EquationTest" end time: Dec 12 08:41 CET
+"UnitaryTest.EquationTest" end time: Dec 14 14:48 CET
 "UnitaryTest.EquationTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -4289,7 +4289,7 @@ Test Passed.
 4/4 Test: prog_test
 Command: "/Users/zhaoyutainazir/Prog Objet Oriente/build/prog_exe" "0" "2" "0.1" "0" "10" "0.1" "uniform" "0"
 Directory: /Users/zhaoyutainazir/Prog Objet Oriente/build
-"prog_test" start time: Dec 12 08:41 CET
+"prog_test" start time: Dec 14 14:48 CET
 Output:
 ----------------------------------------------------------
 --- Solve problem ---
@@ -8394,19 +8394,19 @@ ordre_2
 0.000168269
 0.000132779
 The time-looping took :
-120.522ms
+69.9117ms
 This program took :
-122.58ms
+71.7789ms
 Attention : 
 -> Directory data existed...
 -> existed data was not over-written...
 -> delete directory to save new data...
 <end of output>
-Test time =   0.14 sec
+Test time =   0.33 sec
 ----------------------------------------------------------
 Test Passed.
-"prog_test" end time: Dec 12 08:41 CET
+"prog_test" end time: Dec 14 14:48 CET
 "prog_test" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Dec 12 08:41 CET
+End testing: Dec 14 14:48 CET

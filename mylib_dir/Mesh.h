@@ -80,9 +80,7 @@ public://will get warning
 
 
 class Timer{
-    //Ref: 
-    //https://en.cppreference.com/w/cpp/chrono
-    //https://en.cppreference.com/w/cpp/chrono/duration/duration_cast
+
     
     std::chrono::time_point<std::chrono::high_resolution_clock> time_point_start;
     std::chrono::time_point<std::chrono::high_resolution_clock> time_point_end;
@@ -90,7 +88,7 @@ class Timer{
 public:
     void start(){time_point_start = std::chrono::high_resolution_clock::now();}
     void stop(){time_point_end = std::chrono::high_resolution_clock::now();}
-    void print(std::string smth){
+    void print(std::string smth)const{
         const std::chrono::duration<double, std::milli> res = time_point_end - time_point_start;
         std::cout << smth << std::endl;
         std::cout << res.count() << "ms" << std::endl;

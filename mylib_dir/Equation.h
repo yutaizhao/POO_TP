@@ -21,7 +21,7 @@ class Variable{
     
     auto end(){return vect.end();}
     
-    void print(int t);
+    void print(int const t);
     
 };
 
@@ -29,15 +29,15 @@ class Equation{
     public :
     float a = -1 ; //= CFL*(*imesh).get_dx()/(*imesh).get_dt();
     
-    void compute_exact_solution (IMeshPtr imesh, Variable & u_ref, float t);
+    void compute_exact_solution (IMeshPtr const imesh, Variable & u_ref, float const t);
     
-    void compute(IMeshPtr imesh, Variable& u_n, Variable& u_np1);//
+    void compute(IMeshPtr const imesh, Variable& u_n, Variable& u_np1);//
     
     template<typename T>
-    void compute_initial_condition(IMeshPtr imesh,Variable & v,T f); //U_0 = U(X_0,t_n)
+    void compute_initial_condition(IMeshPtr const imesh,Variable & v,T f); //U_0 = U(X_0,t_n)
     
     template<typename C>
-    void compute_for_scheme(IMeshPtr imesh, Variable& u_n, Variable& u_np1);
+    void compute_for_scheme(IMeshPtr const imesh, Variable& u_n, Variable& u_np1);
 };
 
 
@@ -47,7 +47,7 @@ template<typename T>
  concept hasop =  std::is_function<T>::value;
  template<hasop T>
  */
-void Equation::compute_initial_condition(IMeshPtr imesh,Variable& v,T f){
+void Equation::compute_initial_condition(IMeshPtr const imesh,Variable& v,T f){
     
     int i = 0 ;
     std::for_each(v.begin(), v.end(), [&i,imesh,f](auto& vi) {vi = f((*imesh).x_i(i)); ++i;});
@@ -64,14 +64,14 @@ template<typename C>
  concept hasupdate = requires(C aclass){aclass::update();};
  template<hasupdate C>
  */
-void Equation::compute_for_scheme(IMeshPtr imesh, Variable& u_n, Variable& u_np1){
+void Equation::compute_for_scheme(IMeshPtr const imesh, Variable& u_n, Variable& u_np1){
     C::update( a, imesh, u_n, u_np1);
 }
 
 
 class Upwind{
     public :
-    static void update(float a, IMeshPtr imesh, Variable& u_n, Variable& u_np1 ){
+    static void update(float const a, IMeshPtr const imesh, Variable& u_n, Variable& u_np1 ){
         for(int i =1; i<= (*imesh).x_size();++i){
             u_np1[i] =u_n[i] - CFL*(u_n[i] - u_n[i-1]); //CFL = a*dt/dx = 0.5
         }
@@ -82,7 +82,7 @@ class Upwind{
 
 class LaxWendroff{
     public :
-    static void update(float a, IMeshPtr imesh, Variable& u_n, Variable& u_np1 ){
+    static void update(float const a, IMeshPtr const imesh, Variable& u_n, Variable& u_np1 ){
         for(int i =1; i< (*imesh).x_size();++i){
             u_np1[i] =u_n[i] - a*((*imesh).get_dt()/(2*(*imesh).get_dx()))*(u_n[i+1] - u_n[i-1]) + pow(a,2)*(pow((*imesh).get_dt(),2)/(2*pow((*imesh).get_dx(),2)))*(u_n[i+1] - 2*u_n[i] + u_n[i-1]);
             

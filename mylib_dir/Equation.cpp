@@ -1,7 +1,7 @@
 #include "Equation.h"
 
 //this function has been modified during the last version
-void Equation::compute(IMeshPtr imesh, Variable & u_n, Variable & u_np1){
+void Equation::compute(IMeshPtr const imesh, Variable & u_n, Variable & u_np1){
     
     try {
         if(imesh == nullptr){
@@ -31,7 +31,7 @@ void Equation::compute(IMeshPtr imesh, Variable & u_n, Variable & u_np1){
 }
 
 
-void Equation::compute_exact_solution (IMeshPtr imesh, Variable & u_ref, float t){
+void Equation::compute_exact_solution (IMeshPtr const imesh, Variable & u_ref, float const t){
     //NOT required to use lambda function in tp
 
     //std::execution::par, doesnt work for Apple clang
@@ -47,7 +47,7 @@ void Equation::compute_exact_solution (IMeshPtr imesh, Variable & u_ref, float t
 }
 
 
-void Variable::print(int t){
+void Variable::print(int const t){
     
     //std::execution::par, doesnt work for Apple clang
     
